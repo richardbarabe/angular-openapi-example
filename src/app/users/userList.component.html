@@ -1,0 +1,15 @@
+
+<div>
+    <div *ngIf="apiAccessError">
+        <H1>Error contacting server ({{basePath}})</H1>
+        <p>Error: {{ serverError | json }}</p>
+    </div>
+    <H2>Users</H2>
+    <ul *ngIf="users.length > 0; else noUsers">
+        <li *ngFor="let user of users">{{user.username}}</li>
+    </ul>
+</div>
+
+<ng-template #noUsers>
+    <H2>No users to display yet :)</H2>
+</ng-template>

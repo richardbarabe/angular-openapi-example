@@ -1,0 +1,123 @@
+swagger: '2.0'
+info:
+    title: Hello
+    version: 1.0.0
+paths:
+    /users:
+        get:
+            produces:
+                - application/json
+            tags:
+                - user
+            responses:
+                '200':
+                    description: Successful response - returns an array of `User` entities.
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/User'
+                    examples:
+                        application/json:
+                            -
+                                username: burgermania
+                                firstname: Bob
+                                lastname: Burgington
+                                pushupCapacity: 1
+                            -
+                                username: veggie
+                                firstname: Vega
+                                lastname: Eggplant
+                                pushupCapacity: 100
+            operationId: getusers
+            summary: List All users
+            description: Gets a list of all `User` entities.
+        post:
+            tags:
+                - user
+            parameters:
+                -
+                    name: body
+                    description: A new `User` to be created.
+                    schema:
+                        $ref: '#/definitions/User'
+                    in: body
+                    required: true
+            responses:
+                '201':
+                    description: Successful response.
+                '412':
+                    description: When user already exists (based on username)
+            operationId: createUser
+            summary: Create a User
+            description: Creates a new instance of a `User`.
+    '/users/{userId}':
+        get:
+            tags:
+                - user
+            responses:
+                '200':
+                    description: Successful response - returns a single `User`.
+                    schema:
+                        $ref: '#/definitions/User'
+                '404':
+                    description: The user doesn't exists in the backend.
+            operationId: getUser
+            summary: Get a User
+            description: Gets the details of a single instance of a `User`.
+        put:
+            tags:
+                - user
+            parameters:
+                -
+                    name: body
+                    description: Updated `User` information.
+                    schema:
+                        $ref: '#/definitions/User'
+                    in: body
+                    required: true
+            responses:
+                '202':
+                    description: Successful response.
+            operationId: updateUser
+            summary: Update a User
+            description: Updates an existing `User`.
+        delete:
+            tags:
+                - user
+            responses:
+                '204':
+                    description: Successful response.
+            operationId: deleteUser
+            summary: Delete a User
+            description: Deletes an existing `User`.
+        parameters:
+            -
+                name: userId
+                description: A unique identifier for a `User`.
+                in: path
+                required: true
+                type: string
+definitions:
+    User:
+        title: Root Type for User
+        description: A user of the system
+        type: object
+        properties:
+            username:
+                type: string
+            firstname:
+                type: string
+            lastname:
+                type: string
+            pushupCapacity:
+                format: int32
+                type: integer
+            id:
+                description: Unique identifier
+                type: number
+        example:
+            username: WatchOutForChuck
+            firstname: Chuck
+            lastname: Norris
+            pushupCapacity: 999999999
+securityDefinitions: {}

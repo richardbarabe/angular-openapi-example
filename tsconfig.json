@@ -16,5 +16,10 @@
       "es2017",
       "dom"
     ]
-  }
+  },
+  "include" : [
+    "src",
+    "generated-sources"
+  ]
+  
 }
