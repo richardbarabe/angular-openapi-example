@@ -2,6 +2,7 @@
 This project is an example of how one can use openapi-generator in an npm project to generate a rest client ('typescript-angular') from an OpenApi (swagger) definition file, including services and models.
 ## Running this project
 `npm install`
+
 `npm start`
 
 # How to make it in your project
